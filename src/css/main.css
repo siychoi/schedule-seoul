@@ -1,0 +1,30 @@
+.mainimg{
+    width : 400px;
+    height : 500px;
+}
+
+.detailimg{
+    width : 350px;
+    height :450px;
+    margin-left: 80px;
+}
+
+.img_parent{
+    width:100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.detailinfo{
+    margin: 30px;
+    width:2000px;
+    height:300px;
+}
+
+.detailhr{
+    width :100%;
+}
+
+a { text-decoration:none !important;
+    color : inherit; }
+a:hover { text-decoration:none !important }
