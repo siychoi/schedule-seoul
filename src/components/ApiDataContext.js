@@ -18,7 +18,7 @@ export const ApiDataProvider = ({ children }) => {
         const startIdx = page * pageSize + 1;
         const endIdx = (page + 1) * pageSize;
 
-        const response = await axios.get(`http://openapi.seoul.go.kr:8088/${apiKey}/json/culturalEventInfo/${startIdx}/${endIdx}`);
+        const response = await axios.get(`https://openapi.seoul.go.kr:8088/${apiKey}/json/culturalEventInfo/${startIdx}/${endIdx}`);
         const responseData = response.data.culturalEventInfo.row.map((item, index) => {
           return { ...item, id: startIdx + index };
         });
