@@ -54,7 +54,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://siychoi.github.io/scheduleseoul",
+  "homepage": "https://siychoi.github.io/schedule-seoul",
   "devDependencies": {
     "tailwindcss": "^3.4.0"
   }
