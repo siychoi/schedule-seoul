@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import Link from '@mui/material/Link';
 import { useApiData } from './ApiDataContext';
 
 const recommendKeyword = "어린이/청소년 문화행사"
@@ -61,10 +59,10 @@ function RecommendEvent() {
 						</div>
 					</div>
 					<div className="flex justify-center items-center ">
+
 						<dd className="mt-5 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-							<Link href={"/list"} variant="plain">
-								<a className="rounded-3xl bg-indigo-600 px-10 py-3 text-base sm:text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">어린이/청소년 행사 더보기 ></a>
-							</Link>
+							<a href={`/list`} className="rounded-3xl bg-indigo-600 px-10 py-3 text-base sm:text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">어린이/청소년 행사 더보기 ></a>
+
 						</dd>
 					</div>
 				</div>
@@ -92,9 +90,7 @@ function RecommendEvent() {
 					</div>
 					<div className="flex justify-center items-center ">
 						<dd className="mt-5 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-							<Link to={`/list`} variant="plain">
-								<a className="rounded-3xl bg-indigo-600 px-10 py-3 text-base sm:text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">무료 행사 더보기 ></a>
-							</Link>
+							<a href={`/list`} className="rounded-3xl bg-indigo-600 px-10 py-3 text-base sm:text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">무료 행사 더보기 ></a>
 						</dd>
 					</div>
 				</div>
