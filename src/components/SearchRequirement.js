@@ -159,8 +159,6 @@ export default function SearchRequirement() {
     {
       setMoreData(false);
     }
-    console.log(filteredData.length);
-    console.log(eventList.length);
   };
 
   useEffect(() => {
