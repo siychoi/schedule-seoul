@@ -16,7 +16,7 @@ function Topmenu() {
           <button onClick={goBack}>
             <ArrowBackIcon />
           </button>
-          <Link className="text-lg" to="/">
+          <Link className="font-semibold text-xl" to="/">
             스케줄서울
           </Link>
           <Link to="/list" className="">

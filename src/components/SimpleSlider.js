@@ -16,8 +16,7 @@ function SimpleSlider(props) {
       setEvents(apiData);
     }
   }, [apiData]);
-  const codenameArray = Array.from(new Set(apiData.map(item => item.CODENAME)));
-  console.log(codenameArray);
+
   return (
     <Carousel
       IndicatorIcon={events.MAIN_IMG} // Previous Example
@@ -61,7 +60,6 @@ function Item(props) {
       <Box>
         <hr />
         <h1 class="my-5 text-xl">{props.item.TITLE}</h1>
-
         <div className="flex justify-center items-center h-[550px]">
           <Link to={`/detail/${props.item.id}`}>
             <img
