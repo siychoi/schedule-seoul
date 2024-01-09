@@ -20,7 +20,7 @@ function App() {
           <Route path="/detail/:id">
             <Detail />
           </Route>
-          <Route path="/">
+          <Route path="/schedule-seoul">
             <Home />
           </Route>
         </Switch>
