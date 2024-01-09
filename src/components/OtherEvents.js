@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useApiData } from './ApiDataContext';
+import processedData from './JsonData';
 
 function isTodayBeforeStartDate(todayTimestamp, eventStartDate) {
   const today = new Date(todayTimestamp);
@@ -27,23 +28,23 @@ function OtherEvents() {
   useEffect(() => {
 
     const todayTimestamp = Date.now(); // 오늘의 타임스탬프
-    if(apiData)
+    if(processedData)
     {
-      const eventDetailData = apiData.find(event => event.id === parseInt(id));
+      const eventDetailData = processedData.find(event => event.id === parseInt(id));
       if(eventDetailData)
       {
         setEventDetail(eventDetailData);
-        setOtherGenreEvent(apiData.filter(event => 
+        setOtherGenreEvent(processedData.filter(event => 
           event.THEMECODE === eventDetailData.THEMECODE &&
           isTodayBeforeStartDate(todayTimestamp, event.STRTDATE) &&
           event.id !== parseInt(id)));
-        setOtherGuEvent(apiData.filter(event => 
+        setOtherGuEvent(processedData.filter(event => 
           event.GUNAME === eventDetailData.GUNAME &&
           isTodayBeforeStartDate(todayTimestamp, event.STRTDATE) &&
           event.id !== parseInt(id)));
       }
     }
-  }, [apiData, id]);
+  }, [processedData, id]);
 
   shuffle(otherGenreEvent);
   shuffle(otherGuEvent);
