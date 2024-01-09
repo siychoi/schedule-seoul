@@ -1,7 +1,6 @@
 import { useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import Link from '@mui/material/Link';
-import { useApiData } from './ApiDataContext';
 import processedData from './JsonData';
 
 const { kakao } = window;
@@ -29,7 +28,6 @@ function EventDetail() {
   const [eventDataDetail, setEventDataDetail] = useState(null);
   const [registrationStatus, setRegistrationStatus] = useState("");
   const [eventDetailRange, seteventDetailRange] = useState();
-  const { apiData } = useApiData();
   
   useEffect(() => {
     const today = new Date();
@@ -38,8 +36,6 @@ function EventDetail() {
     // 주어진 ID에 해당하는 이벤트 정보를 JSON 데이터에서 찾기
     if (processedData) {
       const eventDetail = processedData.find(event => event.id === parseInt(id));
-
-
 
       // 찾은 이벤트 상세 정보를 상태에 설정
       if (eventDetail) {
@@ -63,7 +59,7 @@ function EventDetail() {
         //kakaomap----
         if(eventDetail.LOT && eventDetail.LAT)
         {
-        const container = document.getElementById('map');
+        const container = document.getElementById('kakaomap');
         const options = {
           center: new kakao.maps.LatLng(eventDetail.LOT, eventDetail.LAT),
           level: 5
@@ -73,7 +69,8 @@ function EventDetail() {
         map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
         const markerPosition = new kakao.maps.LatLng(eventDetail.LOT, eventDetail.LAT);
         const marker = new kakao.maps.Marker({
-          position: markerPosition
+          position: markerPosition,
+          map: map
         });
         marker.setMap(map);
         }
@@ -81,6 +78,7 @@ function EventDetail() {
       }
     }
   }, [processedData, id]); // ID가 변경될 때마다 실행
+  
   return (<>
     {eventDataDetail ?
       <div>
@@ -143,7 +141,7 @@ function EventDetail() {
     </div>
     <hr className="my-3"/>
     <span className="inline-flex items-center rounded-md bg-white px-2 py-1 text-2xl font-bold text-black-700">길찾기</span>
-    <div id="map" className=" w-full h-96 px-2 py-1 mt-5"></div>
+    <div id="kakaomap" className="flex w-full h-96 px-2 py-1 mt-5"></div>
     <hr className="my-3"/>
   </>
   );
