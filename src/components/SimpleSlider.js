@@ -4,12 +4,10 @@ import { useState, useEffect } from "react";
 import { GrPrevious, GrNext} from "react-icons/gr";
 import Box from "@mui/material/Box";
 import {Link} from "react-router-dom";
-import { useApiData } from './ApiDataContext';
 import processedData from './JsonData';
 
 function SimpleSlider(props) {
   const [events, setEvents] = useState([]);
-  const { apiData } = useApiData();
   useEffect(() => {
     if (processedData) {
       setEvents(processedData);

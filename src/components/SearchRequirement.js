@@ -7,12 +7,12 @@ import RoomIcon from '@mui/icons-material/Room';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { useApiData } from './ApiDataContext';
 import { useState, useEffect} from "react";
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import LoadingButton from '@mui/lab/LoadingButton';
 import processedData from './JsonData';
 import CircularProgress from '@mui/material/CircularProgress';
+import { Link } from 'react-router-dom';
 
 const PAGE_SIZE = 40;
 const ITEM_HEIGHT = 48;
@@ -82,7 +82,6 @@ export default function SearchRequirement() {
   const [category, setCategory] = useState('전체');
   const [isFreeChecked, setIsFreeChecked] = useState(false);
   const [isBeforeEndChecked, setIsBeforeEndChecked] = useState(true);
-  const { apiData } = useApiData();
   const [eventList, setEventList] = useState([]);
   const [clicked, setClicked] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -247,13 +246,13 @@ export default function SearchRequirement() {
 
       </div>
       <div>
-        {apiData ?
+        {processedData ?
           <>
             <div className="bg-white">
               <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-6 lg:max-w-7xl lg:px-8">
                 <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                   {eventList.map((product, index) => (
-                    <a key={index} href={`/detail/${product.id}`} className="group">
+                    <Link to={`/detail/${product.id}`} className="group">
                       <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                         <img
                           src={product.MAIN_IMG}
@@ -262,7 +261,7 @@ export default function SearchRequirement() {
                         />
                       </div>
                       <p className="mt-1 text-lg font-medium text-gray-900">{product.TITLE}</p>
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>

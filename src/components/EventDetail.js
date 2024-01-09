@@ -1,9 +1,9 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Link from '@mui/material/Link';
 import processedData from './JsonData';
 
-const { kakao } = window;
+const { naver } = window;
 
 function calculateDaysDiff(startDate, endDate) {
   const start = new Date(startDate);
@@ -56,29 +56,28 @@ function EventDetail() {
         const [startDate, endDate] = eventRange.split("~");
         seteventDetailRange(calculateDaysDiff(startDate, endDate));
 
-        //kakaomap----
-        if(eventDetail.LOT && eventDetail.LAT)
-        {
-        const container = document.getElementById('kakaomap');
-        const options = {
-          center: new kakao.maps.LatLng(eventDetail.LOT, eventDetail.LAT),
-          level: 5
+        //navermap----
+
+        if (eventDetail.LOT && eventDetail.LAT) {
+          const location = new naver.maps.LatLng(eventDetail.LOT, eventDetail.LAT);
+          const map = new naver.maps.Map('navermap', {
+            center: location,
+            zoom: 16,
+            zoomControl: true,
+          });
+          new naver.maps.Marker({
+            position: location,
+            map,
+          })
+
         }
-        const map = new kakao.maps.Map(container, options);
-        const zoomControl = new kakao.maps.ZoomControl();
-        map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-        const markerPosition = new kakao.maps.LatLng(eventDetail.LOT, eventDetail.LAT);
-        const marker = new kakao.maps.Marker({
-          position: markerPosition,
-          map: map
-        });
-        marker.setMap(map);
-        }
-        //kakaomap----
+        //navermap----
+
+
       }
     }
   }, [processedData, id]); // ID가 변경될 때마다 실행
-  
+
   return (<>
     {eventDataDetail ?
       <div>
@@ -128,9 +127,9 @@ function EventDetail() {
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt className="text-m font-bold leading-6 text-gray-900">공식 홈페이지</dt>
                   <dd className=" w-40 mt-5 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    <Link href={eventDataDetail.ORG_LINK} variant="plain">
+                    <a href={eventDataDetail.ORG_LINK} variant="plain">
                       <span className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">홈페이지 바로가기</span>
-                    </Link>
+                    </a>
                   </dd>
                 </div>
               </dl>
@@ -141,7 +140,7 @@ function EventDetail() {
     </div>
     <hr className="my-3"/>
     <span className="inline-flex items-center rounded-md bg-white px-2 py-1 text-2xl font-bold text-black-700">길찾기</span>
-    <div id="kakaomap" className="flex w-full h-96 px-2 py-1 mt-5"></div>
+    <div id="navermap" className="flex w-full h-96 px-2 py-1 mt-5"></div>
     <hr className="my-3"/>
   </>
   );

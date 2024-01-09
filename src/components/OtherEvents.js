@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useApiData } from './ApiDataContext';
 import processedData from './JsonData';
+import { Link } from 'react-router-dom';
 
 function isTodayBeforeStartDate(todayTimestamp, eventStartDate) {
   const today = new Date(todayTimestamp);
@@ -22,8 +22,6 @@ function OtherEvents() {
   const [otherGenreEvent, setOtherGenreEvent] = useState([]);
   const [otherGuEvent, setOtherGuEvent] = useState([]);
   const [eventDetail, setEventDetail] = useState(null);
-
-  const { apiData } = useApiData();
   
   useEffect(() => {
 
@@ -57,7 +55,7 @@ function OtherEvents() {
           <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8">
             <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
               {otherGenreEvent.slice(0,8).map((product) => (
-                <a key={product.id} href={`/detail/${product.id}`} className="group">
+                <Link to={`/detail/${product.id}`} className="group">
                   <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                       <img
                         src={product.MAIN_IMG}
@@ -66,7 +64,7 @@ function OtherEvents() {
                       />
                   </div>
                   <p className="mt-1 text-lg font-medium text-gray-900">{product.TITLE}</p>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -77,7 +75,7 @@ function OtherEvents() {
           <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8">
             <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
               {otherGuEvent.slice(0,8).map((product) => (
-                <a key={product.id} href={`/detail/${product.id}`} className="group">
+                <Link to={`/detail/${product.id}`} className="group">
                   <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                       <img
                         src={product.MAIN_IMG}
@@ -86,7 +84,7 @@ function OtherEvents() {
                       />
                   </div>
                   <p className="mt-1 text-lg font-medium text-gray-900">{product.TITLE}</p>
-                </a>
+                </Link>
               ))}
             </div>
           </div>

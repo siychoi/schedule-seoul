@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useApiData } from './ApiDataContext';
 import processedData from './JsonData';
+import { Link } from "react-router-dom";
 
 const recommendKeyword = "어린이/청소년 문화행사"
 
@@ -20,7 +20,6 @@ function isTodayBeforeStartDate(todayTimestamp, eventStartDate) {
 function RecommendEvent() {
 	const [recommendedEvent, setRecommendedEvent] = useState([]);
 	const [freeEvent, setFreeEvent] = useState([]);
-	const { apiData } = useApiData();
 
 	useEffect(() => {
 		const todayTimestamp = Date.now(); // 오늘의 타임스탬프
@@ -61,7 +60,7 @@ function RecommendEvent() {
 					</div>
 					<div className="flex justify-center items-center ">
 						<dd className="mt-5 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-							<a href={`/list`} className="rounded-3xl bg-indigo-600 px-10 py-3 text-base sm:text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">어린이/청소년 행사 더보기 ></a>
+							<Link to={`/list`} className="rounded-3xl bg-indigo-600 px-10 py-3 text-base sm:text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">어린이/청소년 행사 더보기 ></Link>
 						</dd>
 					</div>
 				</div>
@@ -74,7 +73,7 @@ function RecommendEvent() {
 					<div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
 						<div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
 							{freeEvent.slice(0, 4).map((product) => (
-								<a key={product.id} href={`/detail/${product.id}`} className="group">
+								<Link to={`/detail/${product.id}`} className="group">
 									<div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
 										<img
 											src={product.MAIN_IMG}
@@ -83,13 +82,13 @@ function RecommendEvent() {
 										/>
 									</div>
 									<p className="mt-1 text-lg font-medium text-gray-900">{product.TITLE}</p>
-								</a>
+								</Link>
 							))}
 						</div>
 					</div>
 					<div className="flex justify-center items-center ">
 						<dd className="mt-5 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-							<a href={`/list`} className="rounded-3xl bg-indigo-600 px-10 py-3 text-base sm:text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">무료 행사 더보기 ></a>
+							<Link to={`/list`} className="rounded-3xl bg-indigo-600 px-10 py-3 text-base sm:text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">무료 행사 더보기 ></Link>
 						</dd>
 					</div>
 				</div>

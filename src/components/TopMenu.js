@@ -1,12 +1,12 @@
-import { useHistory, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 
 function Topmenu() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const goBack = () => {
-    history.goBack();
+    navigate(-1);
   };
 
   return (
@@ -16,7 +16,7 @@ function Topmenu() {
           <button onClick={goBack}>
             <ArrowBackIcon />
           </button>
-          <Link className="font-semibold text-xl" to="/schedule-seoul">
+          <Link className="font-semibold text-xl" to="/">
             스케줄서울
           </Link>
           <Link to="/list" className="">
