@@ -2,6 +2,7 @@ import { useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import Link from '@mui/material/Link';
 import { useApiData } from './ApiDataContext';
+import processedData from './JsonData';
 
 const { kakao } = window;
 
@@ -35,8 +36,8 @@ function EventDetail() {
     const todayFormatted = today.toISOString().split("T")[0]; // 현재 날짜를 YYYY-MM-DD 형식으로 포맷
 
     // 주어진 ID에 해당하는 이벤트 정보를 JSON 데이터에서 찾기
-    if (apiData) {
-      const eventDetail = apiData.find(event => event.id === parseInt(id));
+    if (processedData) {
+      const eventDetail = processedData.find(event => event.id === parseInt(id));
 
 
 
@@ -79,7 +80,7 @@ function EventDetail() {
         //kakaomap----
       }
     }
-  }, [apiData, id]); // ID가 변경될 때마다 실행
+  }, [processedData, id]); // ID가 변경될 때마다 실행
   return (<>
     {eventDataDetail ?
       <div>
