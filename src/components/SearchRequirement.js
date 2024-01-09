@@ -11,6 +11,8 @@ import { useApiData } from './ApiDataContext';
 import { useState, useEffect} from "react";
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import LoadingButton from '@mui/lab/LoadingButton';
+import processedData from './JsonData';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const PAGE_SIZE = 40;
 const ITEM_HEIGHT = 48;
@@ -26,7 +28,7 @@ const MenuProps = {
 
 function isTodayBeforeStartDate(todayTimestamp, eventStartDate) {
   const today = new Date(todayTimestamp);
-  const startDate = new Date(eventStartDate.replace(" ", "T"));
+  const startDate = new Date(eventStartDate);
   return today < startDate;
 }
 
@@ -146,7 +148,7 @@ export default function SearchRequirement() {
 
     setLoading(true);
     setLoadingBtn(true);
-    const filteredData = filterData(apiData);
+    const filteredData = filterData(processedData);
     const start = (page - 1) * PAGE_SIZE;
     const end = start + PAGE_SIZE;
     const newData = filteredData.slice(start, end);
@@ -162,12 +164,12 @@ export default function SearchRequirement() {
   };
 
   useEffect(() => {
-    const filteredData = filterData(apiData);
+    const filteredData = filterData(processedData);
     setEventList(filteredData.slice(0, PAGE_SIZE)); // 페이지당 초기 데이터 설정
-  }, [apiData, clicked])
+  }, [clicked])
 
   useEffect(() => {
-    if (!apiData) return;
+    if (!processedData) return;
     if (loadingBtn) loadMoreData();
 
     window.addEventListener('scroll', handleScroll);
@@ -199,7 +201,7 @@ export default function SearchRequirement() {
             id="demo-multiple-name-region"
             value={region}
             onChange={regionChange}
-            input={<OutlinedInput autofocus={true} label="regionnn" />}
+            input={<OutlinedInput autoFocus={true} label="regionnn" />}
             MenuProps={MenuProps}
           >
             {regions.map((name) => (
@@ -221,7 +223,7 @@ export default function SearchRequirement() {
             id="demo-multiple-name-category"
             value={category}
             onChange={categoryChange}
-            input={<OutlinedInput autofocus={true} label="category" />}
+            input={<OutlinedInput autoFocus={true} label="category" />}
             MenuProps={MenuProps}
           >
             {categories.map((name) => (
@@ -237,7 +239,7 @@ export default function SearchRequirement() {
         <FormControlLabel className="w-28" labelPlacement="start" control={<Checkbox checked={isFreeChecked} onChange={freeCheckChange}/>} label="무료행사" />
         <FormControlLabel labelPlacement="start" control={<Checkbox checked={isBeforeEndChecked} onChange={beforeStartCheckChange}/>} label="종료전 행사"/>
         <button 
-          class="ml-5 w-24 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="ml-5 w-24 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           onClick={handleButtonClick}>
           <ManageSearchIcon/>   검색
         </button>
@@ -250,8 +252,8 @@ export default function SearchRequirement() {
             <div className="bg-white">
               <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-6 lg:max-w-7xl lg:px-8">
                 <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-                  {eventList.map((product) => (
-                    <a key={product.id} href={`/detail/${product.id}`} className="group">
+                  {eventList.map((product, index) => (
+                    <a key={index} href={`/detail/${product.id}`} className="group">
                       <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                         <img
                           src={product.MAIN_IMG}
@@ -278,6 +280,7 @@ export default function SearchRequirement() {
           }}
           loading={loadingBtn}
           loadingPosition="end"
+          endIcon={<CircularProgress size={20} />}
           variant="outlined"
           color="inherit"
         >

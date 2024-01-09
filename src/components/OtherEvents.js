@@ -5,7 +5,7 @@ import { useApiData } from './ApiDataContext';
 
 function isTodayBeforeStartDate(todayTimestamp, eventStartDate) {
   const today = new Date(todayTimestamp);
-  const startDate = new Date(eventStartDate.replace(" ", "T"));
+  const startDate = new Date(eventStartDate);
   return today < startDate;
 }
 

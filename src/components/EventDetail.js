@@ -1,7 +1,6 @@
 import { useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import Link from '@mui/material/Link';
-import "../css/main.css"
 import { useApiData } from './ApiDataContext';
 
 const { kakao } = window;
@@ -81,7 +80,6 @@ function EventDetail() {
       }
     }
   }, [apiData, id]); // ID가 변경될 때마다 실행
-  console.log(apiData);
   return (<>
     {eventDataDetail ?
       <div>
@@ -102,37 +100,37 @@ function EventDetail() {
       {eventDataDetail && (
         <>
           <div className="w-full">
-            <div class="mt-6 border-t border-gray-100">
-              <dl class="divide-y divide-gray-100">
-                <div class="px-4 py-6  sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt class="text-m font-bold leading-6 text-gray-900">{eventDetailRange > 0 ? "기간" : "일시"}</dt>
-                  <dd class="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDetailRange > 0 ? eventDataDetail.DATE : eventDataDetail.DATE.slice(0,10)}</dd>
+            <div className="mt-6 border-t border-gray-100">
+              <dl className="divide-y divide-gray-100">
+                <div className="px-4 py-6  sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-m font-bold leading-6 text-gray-900">{eventDetailRange > 0 ? "기간" : "일시"}</dt>
+                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDetailRange > 0 ? eventDataDetail.DATE : eventDataDetail.DATE.slice(0,10)}</dd>
                 </div>
-                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt class="text-m font-bold leading-6 text-gray-900">장소</dt>
-                  <dd class="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDataDetail.PLACE}</dd>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-m font-bold leading-6 text-gray-900">장소</dt>
+                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDataDetail.PLACE}</dd>
                 </div>
-                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt class="text-m font-bold leading-6 text-gray-900">분류</dt>
-                  <dd class="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDataDetail.CODENAME}</dd>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-m font-bold leading-6 text-gray-900">분류</dt>
+                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDataDetail.CODENAME}</dd>
                 </div>
-                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt class="text-m font-bold leading-6 text-gray-900">주관</dt>
-                  <dd class="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDataDetail.ORG_NAME}</dd>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-m font-bold leading-6 text-gray-900">주관</dt>
+                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDataDetail.ORG_NAME}</dd>
                 </div>
-                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt class="text-m font-bold leading-6 text-gray-900">대상</dt>
-                  <dd class="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDataDetail.USE_TRGT}</dd>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-m font-bold leading-6 text-gray-900">대상</dt>
+                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDataDetail.USE_TRGT}</dd>
                 </div>
-                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt class="text-m font-bold leading-6 text-gray-900">비용</dt>
-                  <dd class="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{(eventDataDetail.IS_FREE === "무료") ? eventDataDetail.IS_FREE : eventDataDetail.USE_FEE}</dd>
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-m font-bold leading-6 text-gray-900">비용</dt>
+                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{(eventDataDetail.IS_FREE === "무료") ? eventDataDetail.IS_FREE : eventDataDetail.USE_FEE}</dd>
                 </div>
-                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt class="text-m font-bold leading-6 text-gray-900">공식 홈페이지</dt>
-                  <dd class=" w-40 mt-5 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-m font-bold leading-6 text-gray-900">공식 홈페이지</dt>
+                  <dd className=" w-40 mt-5 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                     <Link href={eventDataDetail.ORG_LINK} variant="plain">
-                      <a class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">홈페이지 바로가기</a>
+                      <span className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">홈페이지 바로가기</span>
                     </Link>
                   </dd>
                 </div>
@@ -142,10 +140,10 @@ function EventDetail() {
         </>
       )}
     </div>
-    <hr class="my-3"/>
-    <span class="inline-flex items-center rounded-md bg-white px-2 py-1 text-2xl font-bold text-black-700">길찾기</span>
-    <div id="map" class=" w-full h-96 px-2 py-1 mt-5"></div>
-    <hr class="my-3"/>
+    <hr className="my-3"/>
+    <span className="inline-flex items-center rounded-md bg-white px-2 py-1 text-2xl font-bold text-black-700">길찾기</span>
+    <div id="map" className=" w-full h-96 px-2 py-1 mt-5"></div>
+    <hr className="my-3"/>
   </>
   );
 }

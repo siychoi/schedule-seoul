@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useApiData } from './ApiDataContext';
+import processedData from './JsonData';
 
 const recommendKeyword = "어린이/청소년 문화행사"
 
@@ -12,7 +13,7 @@ function shuffle(array) {
 
 function isTodayBeforeStartDate(todayTimestamp, eventStartDate) {
 	const today = new Date(todayTimestamp);
-	const startDate = new Date(eventStartDate.replace(" ", "T"));
+	const startDate = new Date(eventStartDate);
 	return today < startDate;
 }
 
@@ -23,15 +24,15 @@ function RecommendEvent() {
 
 	useEffect(() => {
 		const todayTimestamp = Date.now(); // 오늘의 타임스탬프
-		if (apiData) {
-			setRecommendedEvent(apiData.filter(event =>
+		if (processedData) {
+			setRecommendedEvent(processedData.filter(event =>
 				event.THEMECODE === recommendKeyword &&
 				isTodayBeforeStartDate(todayTimestamp, event.STRTDATE)));
-			setFreeEvent(apiData.filter(event =>
+			setFreeEvent(processedData.filter(event =>
 				event.IS_FREE === "무료" &&
 				isTodayBeforeStartDate(todayTimestamp, event.STRTDATE)));
 		}
-	}, [apiData]);
+	}, [processedData]);
 
 	shuffle(recommendedEvent);
 	shuffle(freeEvent);
@@ -39,7 +40,7 @@ function RecommendEvent() {
 		<>
 			<div className="my-24">
 				<div className="flex justify-center items-center">
-					<span class="inline-flex items-center rounded-md bg-white px-2 py-1 text-2xl sm:text-3xl font-bold text-black-700">어린이/청소년을 위한 행사</span>
+					<span className="inline-flex items-center rounded-md bg-white px-2 py-1 text-2xl sm:text-3xl font-bold text-black-700">어린이/청소년을 위한 행사</span>
 				</div>
 				<div className="bg-white text-lg">
 					<div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
@@ -59,17 +60,15 @@ function RecommendEvent() {
 						</div>
 					</div>
 					<div className="flex justify-center items-center ">
-
 						<dd className="mt-5 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
 							<a href={`/list`} className="rounded-3xl bg-indigo-600 px-10 py-3 text-base sm:text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">어린이/청소년 행사 더보기 ></a>
-
 						</dd>
 					</div>
 				</div>
 			</div>
 			<div className="my-24">
 				<div className="flex justify-center items-center">
-					<span class="inline-flex items-center rounded-md bg-white px-2 py-1 text-2xl sm:text-3xl font-bold text-black-700">무료 행사</span>
+					<span className="inline-flex items-center rounded-md bg-white px-2 py-1 text-2xl sm:text-3xl font-bold text-black-700">무료 행사</span>
 				</div>
 				<div className="bg-white text-lg">
 					<div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">

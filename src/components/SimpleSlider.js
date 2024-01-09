@@ -2,21 +2,19 @@ import React from 'react';
 import Carousel from 'react-material-ui-carousel'
 import { useState, useEffect } from "react";
 import { GrPrevious, GrNext} from "react-icons/gr";
-import "../css/main.css"
 import Box from "@mui/material/Box";
 import {Link} from "react-router-dom";
 import { useApiData } from './ApiDataContext';
+import processedData from './JsonData';
 
 function SimpleSlider(props) {
   const [events, setEvents] = useState([]);
   const { apiData } = useApiData();
-
   useEffect(() => {
-    if (apiData) {
-      setEvents(apiData);
+    if (processedData) {
+      setEvents(processedData);
     }
-  }, [apiData]);
-
+  }, [processedData]);
   return (
     <Carousel
       IndicatorIcon={events.MAIN_IMG} // Previous Example
@@ -59,7 +57,7 @@ function Item(props) {
     <>
       <Box>
         <hr />
-        <h1 class="my-5 text-xl">{props.item.TITLE}</h1>
+        <h1 className="my-5 text-xl">{props.item.TITLE}</h1>
         <div className="flex justify-center items-center h-[550px]">
           <Link to={`/detail/${props.item.id}`}>
             <img
