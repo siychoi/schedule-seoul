@@ -13,9 +13,10 @@ function SimpleSlider(props) {
       setEvents(processedData);
     }
   }, [processedData]);
+  
   return (
     <Carousel
-      IndicatorIcon={events.MAIN_IMG} // Previous Example
+      IndicatorIcon={events.main_img} // Previous Example
       indicatorIconButtonProps={{
         style: {
           padding: '10px',    // 1
@@ -55,12 +56,12 @@ function Item(props) {
     <>
       <Box>
         <hr />
-        <h1 className="my-5 text-xl">{props.item.TITLE}</h1>
+        <h1 className="my-5 text-xl">{props.item.title}</h1>
         <div className="flex justify-center items-center h-[550px]">
           <Link to={`/detail/${props.item.id}`}>
             <img
               className="w-full max-w-sm min-w-72"
-              src={props.item.MAIN_IMG}
+              src={props.item.main_img}
             />
           </Link>
         </div>

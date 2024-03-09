@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Link from '@mui/material/Link';
 import processedData from './JsonData';
 
 const { naver } = window;
@@ -42,7 +41,7 @@ function EventDetail() {
         setEventDataDetail(eventDetail);
 
         // 이벤트 시작일과 오늘 날짜를 비교하여 이벤트 등록 상태 설정
-        const eventStartDate = new Date(eventDetail.STRTDATE);
+        const eventStartDate = new Date(eventDetail.strtdate);
         const eventStartFormatted = eventStartDate.toISOString().split("T")[0];
         const dday = calculateDaysDiff(todayFormatted, eventStartFormatted);
         if (dday === 0) {
@@ -52,37 +51,35 @@ function EventDetail() {
         } else {
           setRegistrationStatus("시작됨");
         }
-        const eventRange = eventDetail.DATE;
+        const eventRange = eventDetail.date;
         const [startDate, endDate] = eventRange.split("~");
         seteventDetailRange(calculateDaysDiff(startDate, endDate));
 
         //navermap----
 
-        if (eventDetail.LOT && eventDetail.LAT) {
-          const location = new naver.maps.LatLng(eventDetail.LOT, eventDetail.LAT);
+        if (eventDetail.lot && eventDetail.lat) {
+          const location = new naver.maps.LatLng(eventDetail.lot, eventDetail.lat);
           const map = new naver.maps.Map('navermap', {
             center: location,
             zoom: 16,
             zoomControl: true,
+            minZoom: 11,
           });
           new naver.maps.Marker({
             position: location,
             map,
           })
-
         }
         //navermap----
-
-
       }
     }
   }, [processedData, id]); // ID가 변경될 때마다 실행
-
+  
   return (<>
     {eventDataDetail ?
       <div>
         <h1 className="mt-5 font-semibold text-xl sm:text-2xl">
-          {eventDataDetail.TITLE}
+          {eventDataDetail.title}
         </h1>
         <span className="inline-flex items-center rounded-md bg-green-50 my-5 px-2 py-1 text-xl font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
           {registrationStatus}
@@ -92,7 +89,7 @@ function EventDetail() {
     <div className="w-full sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
       {eventDataDetail && (
         <div className="w-full max-w-md min-w-80 pr-10">
-          <img src={eventDataDetail.MAIN_IMG} alt={eventDataDetail.TITLE}/>
+          <img src={eventDataDetail.main_img} alt={eventDataDetail.title}/>
         </div>
       )}
       {eventDataDetail && (
@@ -102,32 +99,32 @@ function EventDetail() {
               <dl className="divide-y divide-gray-100">
                 <div className="px-4 py-6  sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt className="text-m font-bold leading-6 text-gray-900">{eventDetailRange > 0 ? "기간" : "일시"}</dt>
-                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDetailRange > 0 ? eventDataDetail.DATE : eventDataDetail.DATE.slice(0,10)}</dd>
+                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDetailRange > 0 ? eventDataDetail.date : eventDataDetail.date.slice(0,10)}</dd>
                 </div>
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt className="text-m font-bold leading-6 text-gray-900">장소</dt>
-                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDataDetail.PLACE}</dd>
+                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDataDetail.place}</dd>
                 </div>
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt className="text-m font-bold leading-6 text-gray-900">분류</dt>
-                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDataDetail.CODENAME}</dd>
+                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDataDetail.codename}</dd>
                 </div>
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt className="text-m font-bold leading-6 text-gray-900">주관</dt>
-                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDataDetail.ORG_NAME}</dd>
+                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDataDetail.org_name}</dd>
                 </div>
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt className="text-m font-bold leading-6 text-gray-900">대상</dt>
-                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDataDetail.USE_TRGT}</dd>
+                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{eventDataDetail.use_trgt}</dd>
                 </div>
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt className="text-m font-bold leading-6 text-gray-900">비용</dt>
-                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{(eventDataDetail.IS_FREE === "무료") ? eventDataDetail.IS_FREE : eventDataDetail.USE_FEE}</dd>
+                  <dd className="w-full mt-1 text-m leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{(eventDataDetail.is_free === "무료") ? eventDataDetail.is_free : eventDataDetail.use_fee}</dd>
                 </div>
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt className="text-m font-bold leading-6 text-gray-900">공식 홈페이지</dt>
                   <dd className=" w-40 mt-5 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    <a href={eventDataDetail.ORG_LINK} variant="plain">
+                    <a href={eventDataDetail.org_link} variant="plain" target="_blank">
                       <span className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">홈페이지 바로가기</span>
                     </a>
                   </dd>

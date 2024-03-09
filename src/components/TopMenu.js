@@ -1,6 +1,7 @@
 import { useNavigate, Link } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import IconButton from '@mui/material/IconButton';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
 function Topmenu() {
   const navigate = useNavigate();
@@ -16,13 +17,14 @@ function Topmenu() {
           <button onClick={goBack}>
             <ArrowBackIcon />
           </button>
-          <Link className="font-semibold text-xl" to="/">
+          <Link className="font-semibold text-2xl" to="/">
             스케줄서울
           </Link>
-          <Link to="/list" className="">
-            <ManageSearchIcon />
+          <Link to="/list">
+            <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+              <FormatListBulletedIcon />
+            </IconButton>
           </Link>
-
         </div>
       </div>
     </div>

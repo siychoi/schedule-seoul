@@ -5,6 +5,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './routes/Home';
 import Detail from './routes/Detail';
 import List from './routes/List';
+import ReactGA from "react-ga4";
+
+if (process.env.REACT_APP_GA_KEY) {
+  ReactGA.initialize(process.env.REACT_APP_GA_KEY);
+}
 
 const basename = process.env.PUBLIC_URL;
 const root = ReactDOM.createRoot(document.getElementById('root'));

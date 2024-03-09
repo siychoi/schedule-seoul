@@ -25,11 +25,11 @@ function RecommendEvent() {
 		const todayTimestamp = Date.now(); // 오늘의 타임스탬프
 		if (processedData) {
 			setRecommendedEvent(processedData.filter(event =>
-				event.THEMECODE === recommendKeyword &&
-				isTodayBeforeStartDate(todayTimestamp, event.STRTDATE)));
+				event.themecode === recommendKeyword &&
+				isTodayBeforeStartDate(todayTimestamp, event.strtdate)));
 			setFreeEvent(processedData.filter(event =>
-				event.IS_FREE === "무료" &&
-				isTodayBeforeStartDate(todayTimestamp, event.STRTDATE)));
+				event.is_free === "무료" &&
+				isTodayBeforeStartDate(todayTimestamp, event.strtdate)));
 		}
 	}, [processedData]);
 
@@ -45,22 +45,22 @@ function RecommendEvent() {
 					<div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
 						<div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
 							{recommendedEvent.slice(0, 4).map((product) => (
-								<a key={product.id} href={`/detail/${product.id}`} className="group">
+								<Link key={product.id} to={`/detail/${product.id}`} className="group">
 									<div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
 										<img
-											src={product.MAIN_IMG}
-											alt={product.TITLE}
+											src={product.main_img}
+											alt={product.title}
 											className=" h-60 w-full object-cover object-center group-hover:opacity-75"
 										/>
 									</div>
-									<p className="mt-1 text-lg font-medium text-gray-900">{product.TITLE}</p>
-								</a>
+									<p className="mt-1 text-lg font-medium text-gray-900">{product.title}</p>
+								</Link>
 							))}
 						</div>
 					</div>
 					<div className="flex justify-center items-center ">
 						<dd className="mt-5 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-							<Link to={`/list`} className="rounded-3xl bg-indigo-600 px-10 py-3 text-base sm:text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">어린이/청소년 행사 더보기 ></Link>
+							<Link state={'어린이/청소년 문화행사'} key={1} to={`/list`} className="rounded-3xl bg-indigo-600 px-10 py-3 text-base sm:text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">어린이/청소년 행사 더보기 ></Link>
 						</dd>
 					</div>
 				</div>
@@ -76,19 +76,19 @@ function RecommendEvent() {
 								<Link to={`/detail/${product.id}`} className="group">
 									<div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
 										<img
-											src={product.MAIN_IMG}
-											alt={product.TITLE}
+											src={product.main_img}
+											alt={product.title}
 											className=" h-60 w-full object-cover object-center group-hover:opacity-75"
 										/>
 									</div>
-									<p className="mt-1 text-lg font-medium text-gray-900">{product.TITLE}</p>
+									<p className="mt-1 text-lg font-medium text-gray-900">{product.title}</p>
 								</Link>
 							))}
 						</div>
 					</div>
 					<div className="flex justify-center items-center ">
 						<dd className="mt-5 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-							<Link to={`/list`} className="rounded-3xl bg-indigo-600 px-10 py-3 text-base sm:text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">무료 행사 더보기 ></Link>
+							<Link state={true} key={2} to={`/list`} className="rounded-3xl bg-indigo-600 px-10 py-3 text-base sm:text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">무료 행사 더보기 ></Link>
 						</dd>
 					</div>
 				</div>

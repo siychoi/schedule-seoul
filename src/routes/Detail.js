@@ -3,6 +3,7 @@ import Container from '@mui/material/Container';
 import EventDetail from "../components/EventDetail";
 import OtherEvents from "../components/OtherEvents";
 import Topmenu from "../components/TopMenu";
+import BottomInfo from "../components/BottomInfo";
 
 function Detail() {
   const [loading, setLoading] = useState(true);
@@ -18,8 +19,8 @@ function Detail() {
         <Container>
           <EventDetail />
           <OtherEvents />
+          <BottomInfo />
         </Container>
-        
       }
     </div>
   );
